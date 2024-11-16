@@ -141,31 +141,25 @@ final_rag_chain = (
 
 
 
-
-st.markdown("<h1 style='text-align: center;'>Hong Kong 🔥 🇭🇰 🔥 Trip Planner</h1>", unsafe_allow_html=True)
-
-# openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
-
+# Title
+st.markdown("<h1 style='text-align: center; font-size: calc(1.5rem + 1vw);'>Hong Kong 🔥 🇭🇰 🔥 Trip Planner</h1>", unsafe_allow_html=True)
 
 def generate_response(question):
-    # print(question)
     answer = final_rag_chain.invoke({"question":question})
-    # print(answer)
-
     st.info(answer)
 
+# Main content
+st.markdown("<h4 style='text-align: center; color: #FF5733; font-size: calc(1rem + 0.5vw);'>How do you want to plan your trip in Hong Kong?</h4>", unsafe_allow_html=True)
 
-st.markdown("<h4 style='text-align: center; color: #FF5733;'>How do you want to plan your trip in Hong Kong?</h4>", unsafe_allow_html=True)
-# st.markdown("<h3 style='text-align: center; color: #FF5733;'>ASK AWAY!!!</h3>", unsafe_allow_html=True)
-
-import streamlit as st
-
+# Form
 with st.form("my_form"):
-    st.markdown("<h4 style='text-align: center;'>ASK AWAY!!!</h4>", unsafe_allow_html=True)
-    text = st.text_area('Below is an example. I encourage you to think about what kind of things you\'d like to see or do in the city. Coffee, dumplings, Michelin foods, nature, hikes, culture, luxury stuff, weather, shopping....', 
-        "I want a 5-day vacation plan in Hong Kong. I want an itinerary where I can have good siu mei and dim sum and then some coffee. I want to spend one day hiking exploring nature as well. "   
+    st.markdown("<h4 style='text-align: center; font-size: calc(1rem + 0.5vw);'>ASK AWAY!!!</h4>", unsafe_allow_html=True)
+    text = st.text_area(
+        'Below is an example. I encourage you to think about what kind of things you\'d like to see or do in the city. Coffee, dumplings, Michelin foods, nature, hikes, culture, luxury stuff, weather, shopping....',
+        "I want a 5-day vacation plan in Hong Kong. I want an itinerary where I can have good siu mei and dim sum and then some coffee. I want to spend one day hiking exploring nature as well. ",
+        height=150  # Fixed height for better mobile display
     )
-    # Using a Markdown container for the button to align it to the right
+    
     col1, col2 = st.columns([6, 1])  # Create two columns
     with col2:
         submitted = st.form_submit_button("Submit")
@@ -174,22 +168,45 @@ with st.form("my_form"):
         with st.spinner("Querying embeddings & Inferencing..."):
             generate_response(text)  # Call your function to generate a response
 
-# Disclaimer below the form
-st.markdown('')
+if submitted:
+    with st.spinner("Querying embeddings & Inferencing..."):
+        generate_response(text)
 
-st.markdown(
-    """
-    <div style='position: fixed; bottom: 0; left: 0; right: 0; text-align: center; background-color: white; padding: 10px; border-top: 1px solid #ccc;'>
-                    <small>
-            This application utilizes advanced AI technologies, including Hugging Face model (Meta Llama-3-8B), Chroma embeddings, and LangChain framework to provide travel recommendations in Hong Kong. <br>
-            Huge thanks to HKU NLP Department for opensourcing their instructor-large text embedding model for making this computationally easy. <br>
-            There is slight chance of the AI hallucinating, so please forget and forgive if the AI makes up a non-existent place or district 😛.   <br>
-            Inquiry: kenchinsonxyz@gmail.com
-        </small>
+# Footer with improved mobile responsiveness
+st.markdown("""
+<style>
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    font-size: 0.8rem;
+    border-top: 1px solid #ccc;
+    max-height: 25vh;
+    overflow-y: auto;
+}
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .footer {
+        position: relative;
+        margin-top: 2rem;
+        font-size: 0.7rem;
+        padding: 8px;
+    }
+}
+</style>
+<div class="footer">
+    <div class="footer-content">
+        This application utilizes advanced AI technologies, including Hugging Face model (Meta Llama-3-8B), Chroma embeddings, and LangChain framework to provide travel recommendations in Hong Kong.<br>
+        Huge thanks to HKU NLP Department for opensourcing their instructor-large text embedding model for making this computationally easy.<br>
+        There is slight chance of the AI hallucinating, so please forget and forgive if the AI makes up a non-existent place or district 😛<br>
+        Inquiry: kenchinsonxyz@gmail.com
     </div>
-    """, 
-    unsafe_allow_html=True
-)
-            # The responses are generated based on various algorithms and pre-processed data. <br>
-                # Please note that while we strive for accuracy, the recommendations may not cover all available options and should be used as a guide only.
-# 
+</div>
+""", unsafe_allow_html=True)
