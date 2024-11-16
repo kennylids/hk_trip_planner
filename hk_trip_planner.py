@@ -172,7 +172,6 @@ with st.form("my_form"):
 st.markdown("""
 <style>
 .footer {
-    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
