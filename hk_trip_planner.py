@@ -160,9 +160,26 @@ with st.form("my_form"):
         height=150  # Fixed height for better mobile display
     )
     
-    col1, col2 = st.columns([6, 1])  # Create two columns
+    # CSS to style the submit button container
+    st.markdown("""
+        <style>
+        .submit-button-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    # # Container for the submit button
+    # with st.container():
+    #     col1, col2 = st.columns([4,1])
+    #     with col2:
+    #         submitted = st.form_submit_button("Ask!", use_container_width=True)
+    # Create columns with a 4:1:1 ratio
+    col1, col2, col3 = st.columns([8, 2, 0.1])
     with col2:
-        submitted = st.form_submit_button("Ask!")
+        submitted = st.form_submit_button("Ask!", use_container_width=True)
 
     if submitted:
         with st.spinner("Querying embeddings & Inferencing..."):
