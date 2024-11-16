@@ -73,7 +73,6 @@ template_travel = """You are a very helpful travel guide in Hong Kong.  Your goa
 {context}
 
 Question: {question}
-Travel guide:
 """
 prompt = ChatPromptTemplate.from_template(template_travel)
 
@@ -214,7 +213,7 @@ st.markdown("""
 </style>
 <div class="footer">
     <div class="footer-content">
-        This application utilizes advanced AI technologies, including Hugging Face model (Meta Llama-3-8B), Chroma embeddings, and LangChain framework to provide travel recommendations in Hong Kong.<br>
+        This application utilizes Hugging Face model (Meta Llama-3-8B), Chroma embeddings, and LangChain framework to provide travel recommendations in Hong Kong.<br>
         Huge thanks to HKU NLP Department for opensourcing their instructor-large text embedding model for making this computationally easy.<br>
         There is slight chance of the AI hallucinating, so please forget and forgive if the AI makes up a non-existent place or district 😛<br>
         Inquiry: kenchinsonxyz@gmail.com
