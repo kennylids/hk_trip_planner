@@ -37,8 +37,8 @@ from langchain.prompts import ChatPromptTemplate
 
 
 # 1. vector-store pre-rendered
-persist_directory = 'large_db'
-model_name = "hkunlp/instructor-large"
+persist_directory = 'base_db'
+model_name = "hkunlp/instructor-base"
 # persist_directory = 'base_db'
 # model_name = "hkunlp/instructor-base"
 
