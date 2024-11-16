@@ -162,7 +162,7 @@ with st.form("my_form"):
     
     col1, col2 = st.columns([6, 1])  # Create two columns
     with col2:
-        submitted = st.form_submit_button("Submit")
+        submitted = st.form_submit_button("Ask!")
 
     if submitted:
         with st.spinner("Querying embeddings & Inferencing..."):
