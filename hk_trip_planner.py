@@ -168,10 +168,6 @@ with st.form("my_form"):
         with st.spinner("Querying embeddings & Inferencing..."):
             generate_response(text)  # Call your function to generate a response
 
-if submitted:
-    with st.spinner("Querying embeddings & Inferencing..."):
-        generate_response(text)
-
 # Footer with improved mobile responsiveness
 st.markdown("""
 <style>
