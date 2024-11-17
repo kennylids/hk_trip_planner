@@ -154,7 +154,7 @@ st.markdown("<h4 style='text-align: center; color: #FF5733; font-size: calc(1rem
 with st.form("my_form"):
     st.markdown("<h4 style='text-align: center; font-size: calc(1rem + 0.5vw);'>ASK AWAY!!!</h4>", unsafe_allow_html=True)
     text = st.text_area(
-        'Below is an example. I encourage you to think about what kind of things you\'d like to see or do in the city. Coffee, dumplings, Michelin foods, nature, hikes, culture, luxury stuff, weather, shopping....',
+        'Below is an example. I encourage you to think about what kind of things you\'d like to see or do in the city. Coffee, dumplings, Michelin foods, nature, hikes, culture, luxury stuff, weather, shopping... Click the Ask! button btw',
         "I want a 5-day vacation plan in Hong Kong. I want an itinerary where I can have good siu mei and dim sum and then some coffee. I want to spend one day hiking exploring nature as well. ",
         height=150  # Fixed height for better mobile display
     )
