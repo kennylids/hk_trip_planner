@@ -7,10 +7,10 @@ if st.secrets["IS_PRODUCTION"]=='True':
     import sys
     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
-    os.environ['LANGCHAIN_TRACING_V2'] = st.secrets["LANGCHAIN_TRACING_V2_"]
-    os.environ['LANGCHAIN_ENDPOINT'] = st.secrets["LANGCHAIN_ENDPOINT_"]
-    os.environ['LANGCHAIN_API_KEY'] = st.secrets["LANGCHAIN_API_KEY_"]
-    os.environ['LANGCHAIN_PROJECT'] = st.secrets["LANGCHAIN_PROJECT_"]
+os.environ['LANGCHAIN_TRACING_V2'] = st.secrets["LANGCHAIN_TRACING_V2_"]
+os.environ['LANGCHAIN_ENDPOINT'] = st.secrets["LANGCHAIN_ENDPOINT_"]
+os.environ['LANGCHAIN_API_KEY'] = st.secrets["LANGCHAIN_API_KEY_"]
+os.environ['LANGCHAIN_PROJECT'] = st.secrets["LANGCHAIN_PROJECT_"]
 
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["hf_access_token"]
 
@@ -91,7 +91,7 @@ generate_queries = (
     | llm
     | StrOutputParser() 
     # | (lambda x: x.split("***")[1:4])
-    | (lambda x: re.findall(r'\*\*\*(.*?)\*\*\*', x))
+    | (lambda x: re.findall(r'\*\*\*(.*?)\*\*\*', x)[:3])
     
 )
 
@@ -170,19 +170,23 @@ with st.form("my_form"):
         </style>
     """, unsafe_allow_html=True)
     
-    # # Container for the submit button
-    # with st.container():
-    #     col1, col2 = st.columns([4,1])
-    #     with col2:
-    #         submitted = st.form_submit_button("Ask!", use_container_width=True)
-    # Create columns with a 4:1:1 ratio
+    # Initialize a session state variable to track button click status
+    if 'button_clicked' not in st.session_state:
+        st.session_state.button_clicked = False
+
     col1, col2, col3 = st.columns([8, 2, 0.1])
     with col2:
-        submitted = st.form_submit_button("Ask!", use_container_width=True)
+        # Disable button if already clicked
+        submitted = st.form_submit_button("Ask!", use_container_width=True, disabled=st.session_state.button_clicked)
 
     if submitted:
+        # Set button click status to True
+        st.session_state.button_clicked = True
         with st.spinner("Querying embeddings & Inferencing..."):
             generate_response(text)  # Call your function to generate a response
+        
+        # Reset button click status after processing
+        st.session_state.button_clicked = False
 
 # Footer with improved mobile responsiveness
 st.markdown("""
