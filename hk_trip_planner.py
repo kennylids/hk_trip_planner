@@ -218,9 +218,9 @@ st.markdown("""
 <div class="footer">
     <div class="footer-content">
         This application utilizes Hugging Face model (Meta Llama-3-8B), Chroma embeddings, and LangChain framework to provide travel recommendations in Hong Kong.<br>
-        Huge thanks to HKU NLP Department for opensourcing their instructor-large text embedding model for making this computationally easy.<br>
+        Huge thanks to HKU NLP Department for opensourcing their instructor-base text embedding model for making this computationally easy.<br>
         There is slight chance of the AI hallucinating, so please forget and forgive if the AI makes up a non-existent place or district 😛<br>
-        Inquiry: kenchinsonxyz@gmail.com
+        Inquiry: mountainboyhk@gmail.com
     </div>
 </div>
 """, unsafe_allow_html=True)
